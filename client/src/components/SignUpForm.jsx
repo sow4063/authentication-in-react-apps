@@ -46,15 +46,17 @@ const SignUpForm = ({
           errorText={errors.name}
           onChange={onChange}
           value={user.name}
+        />
       </div>
 
       <div className="field-line">
         <TextField
           floatingLabelText="Email"
-          name="name"
+          name="email"
           errorText={errors.email}
           onChange={onChange}
           value={user.email}
+        />
       </div>
 
       <div className="field-line">
@@ -65,6 +67,7 @@ const SignUpForm = ({
           errorText={errors.password}
           onChange={onChange}
           value={user.password}
+        />
       </div>
 
       <div className="button-line">
