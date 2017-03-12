@@ -1,0 +1,4 @@
+{
+  "dbUri": "mongocb://localhost/react_app",
+  "jwtSecret": "here is no secret!!!"
+}

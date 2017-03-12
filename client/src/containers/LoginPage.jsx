@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Auth from '../modules/Auth';
 import LoginForm from '../components/LoginForm.jsx';
 
 class LoginPage extends React.Component {
@@ -6,12 +7,21 @@ class LoginPage extends React.Component {
   /**
    * Class constructor
    */
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
+
+    const storedMessage = localStorage.getItem('successMessage');
+    let successMessage = '';
+
+    if (storedMessage) {
+      successMessage = storedMessage;
+      localStorage.removeItem('successMessage');
+    }
 
     // set the initial component state
     this.state = {
       errors: {},
+      successMessage,
       user: {
         email: '',
         password: ''
@@ -44,13 +54,17 @@ class LoginPage extends React.Component {
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
         // success
-        console.log(xhr.response)
+        console.log(xhr.response);
         // change the component-container state
         this.setState({
           errors: {}
         });
 
-        console.log('The form is valid');
+        // save the token
+        Auth.authenticateUser(xhr.response.token);
+
+        // change the current URL to /
+        this.context.router.replace('/');
       } else {
         // failure
 
@@ -90,6 +104,7 @@ class LoginPage extends React.Component {
         onSubmit={this.processForm}
         onChange={this.changeUser}
         errors={this.state.errors}
+        successMessage={this.state.successMessage}
         user={this.state.user}
       />
     );
