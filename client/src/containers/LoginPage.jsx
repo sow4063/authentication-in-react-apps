@@ -54,7 +54,7 @@ class LoginPage extends React.Component {
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
         // success
-        console.log(xhr.response);
+        
         // change the component-container state
         this.setState({
           errors: {}
@@ -111,5 +111,9 @@ class LoginPage extends React.Component {
   }
 
 }
+
+LoginPage.contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
 export default LoginPage;

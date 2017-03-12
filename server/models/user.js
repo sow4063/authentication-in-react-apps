@@ -28,7 +28,7 @@ UserSchema.pre('save', function saveHook(next) {
   const user = this;
 
   // 새 문서이거나 암호 필드가 변경된 경우에만 실행된다.
-  if (!user.isModified(password)) return next();
+  if (!user.isModified('password')) return next();
 
   return bcrypt.genSalt((saltError, salt) => {
     if (saltError) { return next(saltError); }

@@ -107,12 +107,12 @@ router.post('/signup', (req, res, next) => {
 
     return res.status(200).json({
       success: true,
-      message: 'You have successfully signed up! Now you should be able to log in.'
+      message: '회원 가입에 성공하였습니다. 이제 로그인 해주세요.'
     });
   })(req, res, next);
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
   const validationResult = validateLoginForm(req.body);
   if (!validationResult.success) {
     return res.status(400).json({
@@ -139,7 +139,7 @@ router.post('/login', (req, res) => {
 
     return res.json({
       success: true,
-      message: 'You have successfully logged in!',
+      message: '로그인에 성공하였습니다.',
       token,
       user: userData
     });

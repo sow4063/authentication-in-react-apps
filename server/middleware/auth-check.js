@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('mongoose').model('User');
-const config = reqire('../../config');
+const config = require('../../config');
 
 /**
  * 인증 확인 미들웨어 펑션
@@ -11,7 +11,6 @@ module.exports = (req, res, next) => {
   }
 
   // get the last part from a authorization header string like "bearer token-value"
-  console.log('req.headers.authorization: ', req.headers.authorization);
   const token = req.headers.authorization.split(' ')[1];
 
   // decode the token using a secret key-phrase
@@ -19,7 +18,6 @@ module.exports = (req, res, next) => {
     // the 401 code is for unauthorized status
     if (err) { return res.status(401).end(); }
 
-    console.log('decoded: (.sub is token payload.sub??  )', decoded);
     const userId = decoded.sub;
 
     // check if a user exists
